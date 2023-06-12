@@ -1,3 +1,3 @@
-link_to_partner_interface = "https://dev.partner.domka.shop/login"
+link_to_partner_interface = ""
 partner_login = ""
 partner_password = ""

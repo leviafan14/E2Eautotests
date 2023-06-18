@@ -16,7 +16,7 @@ def page(playwright: Playwright):
     return page
 
 
-# Тестирование авторизации с вводом валидного номере телефона и валидного пароля
+# Тестирование авторизации с вводом валидного номера телефона и валидного пароля
 def test_auth_partner_interface(page) -> None:
     # Открытие страницы авторизации
     page.goto(interface_auth_url)

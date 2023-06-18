@@ -1,6 +1,9 @@
+import allure
+from allure_commons.types import AttachmentType
 import time
 import pytest
-from playwright.sync_api import Page, expect
+import pytest_playwright
+from playwright.sync_api import expect
 from playwright.sync_api import Playwright, sync_playwright
 from auth_data import partner_login, partner_password
 
@@ -8,7 +11,8 @@ from auth_data import partner_login, partner_password
 interface_auth_url = "https://dev.partner.domka.shop/login"
 characters = "&r^r!D№П*ё;л"
 
-@pytest.fixture()
+
+@pytest.fixture
 def page(playwright: Playwright):
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
@@ -21,12 +25,14 @@ def test_auth_partner_interface(page) -> None:
     # Открытие страницы авторизации
     page.goto(interface_auth_url)
     # Ввод номера телефона
-    page.locator("[placeholder=\"Телефон\"]").fill(partner_login)
+    page.get_by_placeholder("Телефон").fill(partner_login)
     # Ввод пароля
-    page.locator("[placeholder=\"Пароль\"]").fill(partner_password)
+    page.get_by_placeholder("Пароль").fill(partner_password)
     # Нажатие на кнопку "Войти" открывает главную страницу интерфейса партнера
+    expect(page.get_by_text("Войти")).to_be_enabled()
     with page.expect_navigation(url="https://dev.partner.domka.shop/"):
-        page.locator("text=Войти").click()
+        page.get_by_text("Войти").click()
+
     page.close()
 
 
@@ -101,9 +107,9 @@ def test_auth_partner_interface_empty_password_phone(page) -> None:
     # Открытие страницы авторизации
     page.goto(interface_auth_url)
     # Поле "Телефон" не заполняется
-    page.locator("[placeholder=\"Телефон\"]").fill("")
+    page.get_by_placeholder("Телефон").fill("")
     # Поле "Пароль" не заполяется
-    page.locator("[placeholder=\"Пароль\"]").fill("")
+    page.get_by_placeholder("Пароль").fill("")
     # Нажатие на кнопку "Войти"
     page.locator("text=Войти").click()
     # Задержка 1 сек. для того чтобы сообщение об ошибке появилось раньше, чем отработает скрипт

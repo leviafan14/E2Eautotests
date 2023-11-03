@@ -4,14 +4,16 @@ import pytest_playwright
 from playwright.sync_api import Playwright, Page, expect
 
 # Ссылка на страницу категории товаров
-category_url = "https://dev.domka.shop/partners/supermarket/"
+shop = "https://dev.domka.shop/partners/supermarket/"
+restaurant = "https://dev.domka.shop/partners/restaurant/"
+partner = 1
 # Ссылка на сайт сервиса
 shop_url = "https://dev.domka.shop/"
 profile_link = "https://dev.domka.shop/profile"
 cart_link = "https://dev.domka.shop/cart"
 customer_phone = "7853000998"
 customer_code = "1111"
-auth_state = "yes"
+auth_state = "no"
 
 
 # Функция очистки корзины

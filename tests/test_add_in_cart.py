@@ -29,11 +29,11 @@ def test_add_prdoucts(playwright: Playwright) -> None:
     flush_cart(page)
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
     # Открытие списка партнеров
-    page.goto(category_url)
+    page.goto(shop)
     # Открытие страницы партнера
-    page.locator(".css-qbyb0p").nth(3).click()
+    page.locator(".css-qbyb0p").nth(6).click()
     # Добавление указанного количества товаров в корзину
-    for i in range(9):
+    for i in range(12):
         try:
             page.get_by_role("button", name="В КОРЗИНУ").nth(i).click()
         except Exception as e:

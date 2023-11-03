@@ -33,7 +33,7 @@ def test_add_prdoucts(playwright: Playwright) -> None:
     # Открытие страницы партнера
     page.locator(".css-qbyb0p").nth(3).click()
     # Добавление указанного количества товаров в корзину
-    for i in range(5):
+    for i in range(9):
         try:
             page.get_by_role("button", name="В КОРЗИНУ").nth(i).click()
         except Exception as e:
@@ -48,7 +48,7 @@ def test_add_prdoucts(playwright: Playwright) -> None:
         page.get_by_text("Очистить корзину").click()
     except Exception as e:
         context.tracing.stop(path="context_trace.zip")
-        print("\nКорзина пуста")
+        print("\nВ корзине не отображаются товары")
     # Получение количества добавленных в корзину товаров
 
     time.sleep(2)

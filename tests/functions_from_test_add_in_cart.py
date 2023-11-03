@@ -9,19 +9,20 @@ category_url = "https://dev.domka.shop/partners/supermarket/"
 shop_url = "https://dev.domka.shop/"
 profile_link = "https://dev.domka.shop/profile"
 cart_link = "https://dev.domka.shop/cart"
-customer_phone = "77853000000"
+customer_phone = "7853000998"
 customer_code = "1111"
 auth_state = "yes"
 
 
 # Функция очистки корзины
 def flush_cart(page: Page) -> None:
-    page.goto(cart_link)
-    try:
-        page.get_by_text("Очистить корзину").click()
-        page.get_by_role("button", name="УДАЛИТЬ И ПРОДОЛЖИТЬ").click()
-    except Exception as e:
-        print("\nКорзина пуста")
+    if auth_state == "yes":
+        page.goto(cart_link)
+        try:
+            page.get_by_text("Очистить корзину").click()
+            page.get_by_role("button", name="УДАЛИТЬ И ПРОДОЛЖИТЬ").click()
+        except Exception as e:
+            print("\nКорзина пуста")
 
 
 def auth_in_shop(page: Page) -> None:

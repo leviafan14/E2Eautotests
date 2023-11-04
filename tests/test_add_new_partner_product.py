@@ -39,7 +39,7 @@ def auth_in_interface(playwright: Playwright) -> Page:
 # Нажатие на иконку "Товары" открывает раздел "Товары"
 def test_goto_products_page(auth_in_interface) -> None:
     with auth_in_interface.expect_navigation(url="https://dev.partner.domka.shop/products"):
-        auth_in_interface.locator(".bx-cart").click()
+        auth_in_interface.locator(".fas.fa-shopping-cart").click()
 
 
 # Открытие интерфейса создания товара
@@ -47,7 +47,8 @@ def test_open_interface_create_product(auth_in_interface) -> None:
     page = auth_in_interface
     # Тест открытия интерфейса создания товара
     with auth_in_interface.expect_navigation(url="https://dev.partner.domka.shop/products/add"):
-        page.get_by_role("button", name=" Добавить").click()
+        time.sleep(1)
+        page.get_by_role("button", name="Добавить").click()
 
 
 # Создание штучного товара с ед. измерения "Объем", срок хранения сутки, заполненными с полями:
@@ -57,10 +58,16 @@ def test_add_new_product_requarement_fields(auth_in_interface):
     page = auth_in_interface
 
     # Ввод названия товара с добавлением полученной временной метки
-    page.get_by_placeholder("Название").first.fill(product_names)
+    page.get_by_placeholder("Название").fill(product_names)
 
     # Раскрытие списка с категориями товара
-    page.locator(".partner.partner_input.w-100.m-0.mt-2").click()
+    category_change = page.get_by_placeholder("Категория")
+    category_change.click()
+    time.sleep(1)
+    category_change.clear()
+    category_change.click()
+    time.sleep(1)
+
 
     # Выбор категории из списка - назначение корневой категории
     # (самая верхняя категория в списке)

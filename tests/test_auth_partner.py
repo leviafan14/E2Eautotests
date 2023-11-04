@@ -1,5 +1,5 @@
 import allure
-from allure_commons.types import AttachmentType
+#from allure_commons.types import AttachmentType
 import time
 import pytest
 import pytest_playwright
@@ -13,7 +13,7 @@ characters = "&r^r!D№П*ё;л"
 
 
 @pytest.fixture
-def page(playwright: Playwright):
+def page(playwright: Playwright) -> Page:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()

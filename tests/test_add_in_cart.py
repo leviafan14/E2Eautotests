@@ -25,6 +25,7 @@ def test_add_prdoucts(playwright: Playwright) -> None:
         test_iter += 1
         # Открытие окна бразуера
         browser = playwright.chromium.launch(headless=False, args=["--start-maximized"])
+        # Создание контекста
         context = browser.new_context(no_viewport=True)
         page = context.new_page()
         # Если нужна авторизация в магазине

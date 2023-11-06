@@ -52,18 +52,17 @@ def auth_in_shop(page: Page) -> None:
 def add_in_cart() -> int:    
     with sync_playwright() as playwright:
         test_iter = 0
+        # Открытие окна бразуера
+        browser = playwright.chromium.launch(headless=False, args=["--start-maximized"])
+        context = browser.new_context(no_viewport=True)
+        page = context.new_page()
+        # Если нужна авторизация в магазине
+        auth_in_shop(page)
         while True:
             test_iter += 1
-            # Открытие окна бразуера
-            browser = playwright.chromium.launch(headless=False, args=["--start-maximized"])
-            context = browser.new_context(no_viewport=True)
-            page = context.new_page()
-            # Если нужна авторизация в магазине
-            if auth_state == "yes":
-                auth_in_shop(page)
-            else:
-                pass
+            # Очистка корзины
             flush_cart(page)
+            # Начало трассировки действий в скрипте
             context.tracing.start(screenshots=True, snapshots=True, sources=True)
             # Открытие списка партнеров
             page.goto(shop)
@@ -84,10 +83,14 @@ def add_in_cart() -> int:
             print(f"\nКоличество добавленных в корзину товаров {count_added_product}")
             try:
                 page.get_by_text("Очистить корзину").click()
+            # Если товары в корзине не отображаются
             except Exception as e:
+                # Завершение трассировки
                 context.tracing.stop(path=f"context_trace_{test_iter}.zip")
                 print("\nВ корзине не отображаются товары")
+                # Выход из цикла
                 break
+            context.tracing.stop()
         time.sleep(1)
         page.close()
         return count_added_product

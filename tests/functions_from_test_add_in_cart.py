@@ -88,6 +88,6 @@ def add_in_cart() -> int:
                 context.tracing.stop(path=f"context_trace_{test_iter}.zip")
                 print("\nВ корзине не отображаются товары")
                 break
-            time.sleep(1)
-            page.close()
+        time.sleep(1)
+        page.close()
         return count_added_product

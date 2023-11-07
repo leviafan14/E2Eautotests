@@ -12,7 +12,7 @@ partner = 1
 shop_url = "https://dev.domka.shop/"
 profile_link = "https://dev.domka.shop/profile"
 cart_link = "https://dev.domka.shop/cart"
-customer_phone = "8530095789"
+customer_phone = "8530695789"
 customer_code = "1111"
 auth_state = "yes"
 

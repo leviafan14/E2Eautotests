@@ -10,12 +10,19 @@ restaurant = "https://dev.domka.shop/partners/restaurant/"
 partner = 1
 # Ссылка на сайт сервиса
 shop_url = "https://dev.domka.shop/"
+# Ссылка на страницу авторизации / профиля
 profile_link = "https://dev.domka.shop/profile"
+# Ссылка на корзину покупателя
 cart_link = "https://dev.domka.shop/cart"
+# Валидный номер телефона покупателя
 customer_phone = "8990095789"
-customer_code = "1111"
+# Невалидный номер, без одной цифры
 invalid_customer_phone_1 = "899009578"
+# Невалидный номер, только с одной цифро
 invalid_customer_phone_2 = "8"
+# Валидный СМС-код
+customer_code = "1111"
+# Состояние авторизации покупателя
 auth_state = "yes"
 
 

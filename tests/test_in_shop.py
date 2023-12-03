@@ -5,10 +5,10 @@ from functions_from_test_add_in_cart import shop_url, customer_phone, customer_c
     invalid_customer_phone_1, invalid_customer_phone_2
 
 
-
 # Фикстура запуска браузера  и создания окружения
 @pytest.fixture
 def page(playwright: Playwright):
+    # Запуск браузера с открытием странциы на экране монитора
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()

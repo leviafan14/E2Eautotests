@@ -58,7 +58,7 @@ def auth_in_shop(page: Page) -> None:
     time.sleep(1)
 
 
-def add_in_cart() -> int:    
+def add_in_cart() -> int:
     with sync_playwright() as playwright:
         test_iter = 0
         # Открытие окна бразуера
